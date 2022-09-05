@@ -6,18 +6,24 @@ import android.widget.Button
 import android.widget.ImageView
 
 class MainActivity : AppCompatActivity() {
+    lateinit var diceImage: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        diceImage = findViewById(R.id.dice_image)
+
         val rollButton: Button = findViewById(R.id.roll_button)
         rollButton.setOnClickListener { rollDice() }
+
+        val clearButton: Button = findViewById(R.id.clear_button)
+        clearButton.setOnClickListener { clear() }
     }
 
     private fun rollDice() {
         val randomInt = (1..6).random()
-
-        val diceImage: ImageView = findViewById(R.id.dice_image)
+        val diceImage : ImageView = findViewById(R.id.dice_image)
 
         val drawableResource = when (randomInt) {
             1 -> R.drawable.dice_1
@@ -29,5 +35,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         diceImage.setImageResource(drawableResource)
+    }
+
+    private fun clear() {
+        val diceImage: ImageView = findViewById(R.id.dice_image)
+
+        diceImage.setImageResource(R.drawable.empty_dice)
     }
 }
